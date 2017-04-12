@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登陆页面</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+</head>
+<body>
+<h1>Spring-security权限验证登陆</h1>
+<p>示例用户: tm003/ Yonglang1024</p>
+<p th:if="${loginError}" class="error">错误的登陆账号密码</p>
+<form th:action="@{/login-pass}" method="post">
+    <label for="username">Username</label>:
+    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+    <label for="password">Password</label>:
+    <input type="password" id="password" name="password" /> <br />
+    <input type="submit" value="Log in" />
+</form>
+<p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+</body>
+</html>

@@ -1,0 +1,16 @@
+spring:
+  data:
+    mongodb:
+      dbname: acount
+      uri: mongodb://127.0.0.1:27017/account
+      port: 27017
+      host: 127.0.0.1
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
