@@ -13,15 +13,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AdministratorServcice administratorServcice;
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //url拦截设置 以及 登陆
         http
             .authorizeRequests()
             .antMatchers("/css/**", "/index").permitAll()
-            .antMatchers("/user/**").hasRole("USER")
-            .antMatchers("/admin/**").access("hasRole('ADMIN') and hasRole('DBA')")
+            .antMatchers("/user/**").hasRole("6")
+//            .antMatchers("/admin/**").access("hasRole('ADMIN') and hasRole('DBA')")
             .and()
             .formLogin().loginPage("/login").failureUrl("/login-error");  //	基于表单的身份验证启用了自定义登录页面和失败网址
         //logout设置

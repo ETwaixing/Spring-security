@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
+ * 自定义用户验证权限
+ *
  * Created by yonglang on 2017/4/11.
  */
 @Component
@@ -55,12 +57,15 @@ public class AdministratorServcice implements UserDetailsService{
         Administrator administrator = getAdminByUsername(s);
         //权限列表
         Set<GrantedAuthority> grantedAuths =getRoles(administrator);
-        String[] auth = {"USER"};
+        //String[] auth = {"USER"};
         // 封装成spring security的user   需要根据权限格式进行改进
         User user = new User(administrator.getAdmin_name(), administrator.getAdmin_pass(),
                 true, true,
                 true, true,
-                AuthorityUtils.createAuthorityList(auth));
+                grantedAuths);
+//        for (GrantedAuthority grantedAuthority:grantedAuths) {
+//            System.out.println(grantedAuthority.getAuthority());
+//        }
         return user;
     }
     //取得用户的权限
@@ -68,7 +73,7 @@ public class AdministratorServcice implements UserDetailsService{
         Set<GrantedAuthority> authSet = new HashSet<>();
         List<AdminRole> roles = administrato.getRoles();
         for(AdminRole role : roles) {
-            GrantedAuthority grantedAuthority = ()->role.getRole_id();
+            GrantedAuthority grantedAuthority = ()->"ROLE_"+role.getRole_id();
             authSet.add(grantedAuthority);
         }
         return authSet;
