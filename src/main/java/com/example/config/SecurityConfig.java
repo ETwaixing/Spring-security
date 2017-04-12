@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.security.MyUserDetailService;
 import com.example.service.AdministratorServcice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -11,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private AdministratorServcice administratorServcice;
+    private MyUserDetailService myUserDetailService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -41,6 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //自定义用户验证：使用数据库中的用户名密码数据
-        auth.userDetailsService(administratorServcice).passwordEncoder(new Md5PasswordEncoder());
+        auth.userDetailsService(myUserDetailService).passwordEncoder(new Md5PasswordEncoder());
     }
 }

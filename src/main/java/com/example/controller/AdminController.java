@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.entity.Administrator;
 import com.example.service.AdministratorServcice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 权限 登陆 注销操作
@@ -61,6 +64,11 @@ public class AdminController {
             e.printStackTrace();
             return "login";
         }
+    }
+    @RequestMapping("/getAll")
+    @ResponseBody
+    public List<Administrator> getAll(){
+        return administratorServcice.getAll();
     }
 
     /**
