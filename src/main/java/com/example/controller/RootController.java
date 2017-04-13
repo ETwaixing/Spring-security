@@ -35,6 +35,11 @@ public class RootController {
         return "user/index";
     }
 
+    @RequestMapping("/user/demo")
+    public String userDemo() {
+        return "user/demo";
+    }
+
     @RequestMapping("/login")
     public String login() {
         return "login";

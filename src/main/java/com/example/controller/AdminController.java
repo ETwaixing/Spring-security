@@ -38,8 +38,8 @@ public class AdminController {
     @RequestMapping(value = "/login-pass", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public String login(@RequestParam(defaultValue="")String username, @RequestParam(defaultValue="")String password,
                         HttpServletRequest request){
-        System.out.println("---------用户名:"+username);
-        System.out.println("---------密码:"+password);
+//        System.out.println("---------用户名:"+username);
+//        System.out.println("---------密码:"+password);
         //将用户名用户密码组成token
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         try {

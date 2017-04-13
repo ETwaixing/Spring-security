@@ -1,7 +1,6 @@
 package com.example;
 
 import com.example.config.SpringDataMongodbConfig;
-import com.example.utils.MongoUtil;
 import com.mongodb.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,7 +22,6 @@ public class DemoApplication implements CommandLineRunner{
 //    private MongoClient mongoClient;
 //    @Autowired
 //    private MongoClientURI mongoClientURI;
-
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
@@ -53,8 +51,5 @@ public class DemoApplication implements CommandLineRunner{
 	public void run(String... strings) throws Exception {
 //		System.out.println(MongoUtil.getDB()!=null);
 //		System.out.println(MongoUtil.getDB());
-//        System.out.println(mongoTemplate!=null);
-//        System.out.println(mongoClient!=null);
-//        System.out.println(mongoClientURI!=null);
 	}
 }
