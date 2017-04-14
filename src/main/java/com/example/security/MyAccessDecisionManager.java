@@ -42,13 +42,17 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
         throw new AccessDeniedException("没有权限");
     }
 
-    //都要设为true
+    /**
+     * 表示当前AccessDecisionManager是否支持对应的ConfigAttribute
+     */
     @Override
     public boolean supports(ConfigAttribute configAttribute) {
         return true;
     }
 
-    //都要设为true
+    /**
+     * 表示当前AccessDecisionManager是否支持对应的受保护对象类型
+     */
     @Override
     public boolean supports(Class<?> aClass) {
         return true;

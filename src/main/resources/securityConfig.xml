@@ -5,13 +5,25 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-<!--<http>   但如果自定义了自定义的UserDetails 则需要重定义equal和hashcode
-    <session-management session-authentication-error-url="/login" >
-        &lt;!&ndash; max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url session过期跳转界面 &ndash;&gt;
-        <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/login" session-registry-ref="sessionRegistry" />
-    </session-management>
-</http>
+<!--    <http>
+        <session-management session-authentication-error-url="/login" >
+            &lt;!&ndash; max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url session过期跳转界面 &ndash;&gt;
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/login"/>
+        </session-management>
+    </http>-->
+<!--    <http>
+        &lt;!&ndash; 登录成功后拒绝访问跳转的页面 &ndash;&gt;
+        <access-denied-handler error-page="/security/deny" />
+    </http>-->
 
-<beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />-->
+    <!-- 使用自定义类myUserDetailsService从数据库获取用户信息 -->
+<!--    <authentication-manager>
+        <authentication-provider user-service-ref="MyUserDetailService">
+            &lt;!&ndash; 加密 &ndash;&gt;
+            <password-encoder hash="md5">
+            </password-encoder>
+        </authentication-provider>
+    </authentication-manager>-->
+
 
 </beans:beans>

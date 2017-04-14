@@ -4,7 +4,6 @@ import com.example.security.LoginSuccessHandler;
 import com.example.security.MySecurityFilter;
 import com.example.security.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -23,6 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MySecurityFilter mySecurityFilter;
     @Autowired
     private MyUserDetailService myUserDetailService;
+    @Autowired
+    private  LoginSuccessHandler loginSuccessHandler;
 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -43,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
             .loginPage("/login")
             .failureUrl("/login-error")                //基于表单的身份验证启用了自定义登录页面和失败网址
-            .successHandler(loginSuccessHandler())       //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
+            .successHandler(loginSuccessHandler)       //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
         .and()
             .logout()
             .logoutSuccessUrl("/logout")
@@ -63,13 +64,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //自定义用户验证：使用数据库中的用户名密码数据
         auth.userDetailsService(myUserDetailService).passwordEncoder(new Md5PasswordEncoder());
     }
-
-    /**
-     *   TODO:未实现 具体原因需要探究
-     */
-    @Bean
-    public LoginSuccessHandler loginSuccessHandler(){
-        return new LoginSuccessHandler();
-    }
-
 }
