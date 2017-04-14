@@ -19,7 +19,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
-
         User userDetail = (User) authentication.getPrincipal();
         //输出登录提示信息
         System.out.println("管理员 " + userDetail.getUsername() + " 登录");

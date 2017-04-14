@@ -35,15 +35,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             //.addFilterBefore(mySecurityFilter, FilterSecurityInterceptor.class)  //在正确的位置添加我们自定义的过滤器
             .authorizeRequests()
-            .antMatchers( "/index","/css/**").permitAll()
-            //.antMatchers("/user/**").hasRole("6")
+            .antMatchers( "/css/**").permitAll()
+            //.antMatchers("/index").hasRole("6")
             //.anyRequest().authenticated()    //其他地址的访问均需验证权限
             //.antMatchers("/admin/**").access("hasRole('ADMIN') and hasRole('DBA')")
         .and()
             .formLogin()
             .loginPage("/login")
+            .failureUrl("/login-error")                //基于表单的身份验证启用了自定义登录页面和失败网址
             .successHandler(loginSuccessHandler())       //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
-            .failureUrl("/login-error")         //基于表单的身份验证启用了自定义登录页面和失败网址
         .and()
             .logout()
             .logoutSuccessUrl("/logout")

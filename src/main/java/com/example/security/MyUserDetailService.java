@@ -26,7 +26,7 @@ public class MyUserDetailService implements UserDetailsService {
     private AdministratorServcice administratorServcice;
 
     /**
-     * TODO: UserDetailsService  Springsecurity的 核心方法
+     * UserDetailsService  Springsecurity的 核心方法
      */
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -34,7 +34,6 @@ public class MyUserDetailService implements UserDetailsService {
         Administrator administrator = administratorServcice.getAdminByUsername(s);
         //权限列表
         Set<GrantedAuthority> grantedAuths =getRoles(administrator);
-        //String[] auth = {"USER"};
         // 封装成spring security的user   需要根据权限格式进行改进
         User user = new User(administrator.getAdmin_name(), administrator.getAdmin_pass(),
                 true, true,

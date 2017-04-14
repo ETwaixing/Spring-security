@@ -35,21 +35,31 @@ public class MySecurityFilter extends AbstractSecurityInterceptor implements Fil
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    /**
+     * 进行资源注入  authenticationManager--认证管理器   accessDecisionManager--决策管理器
+     */
     @PostConstruct
     public void init(){
         super.setAuthenticationManager(authenticationManager);
         super.setAccessDecisionManager(accessDecisionManager);
     }
+    /**
+     *   登陆后，每次访问资源都通过这个拦截器拦截
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         FilterInvocation fi = new FilterInvocation( servletRequest, servletResponse, filterChain );
         invoke(fi);
     }
+
+    /**
+     *    invoke()---重要流程演示
+     */
     public void invoke( FilterInvocation fi ) throws IOException, ServletException{
         //fi里面有一个被拦截的url
         //里面调用MyInvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取fi对应的所有权限
         //再调用MyAccessDecisionManager的decide方法来校验用户的权限是否足够
-        System.out.println("filter..........................");
+        System.out.println("执行拦截器----------------");
         InterceptorStatusToken token = super.beforeInvocation(fi);
         try{
             //执行下一个拦截器

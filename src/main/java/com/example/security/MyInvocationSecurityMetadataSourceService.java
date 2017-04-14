@@ -31,23 +31,31 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
     @PostConstruct
     private void loadResourceDefine(){
         System.out.println("加载权限");
-        List<String> query = new ArrayList<>();
-        //模拟数据
-        query.add("ROLE_ANONYMOUS");
+        //模拟数据  以后将从数据库调用------访问这三个页面都需要权限6
         resourceMap = new HashMap<>();
-        for (String auth : query) {
-            ConfigAttribute ca = new SecurityConfig(auth);
-            Collection<ConfigAttribute> atts = new ArrayList<>();
-            atts.add(ca);
-            resourceMap.put("/login", atts);
-        }
+        Collection<ConfigAttribute> atts = new ArrayList<>();
+        ConfigAttribute ca = new SecurityConfig("ROLE_6");
+        atts.add(ca);
+        resourceMap.put("/index", atts);
+        Collection<ConfigAttribute> attsno =new ArrayList<>();
+        ConfigAttribute cano = new SecurityConfig("ROLE_6");
+        attsno.add(cano);
+        resourceMap.put("/user/index", attsno);
+        Collection<ConfigAttribute> attsno1 =new ArrayList<>();
+        ConfigAttribute cano1 = new SecurityConfig("ROLE_999");
+        attsno1.add(cano1);
+        resourceMap.put("/user/demo", attsno1);
     }
 
-    // 根据URL，找到相关的权限配置。
-    // object 是一个URL，被用户请求的url
+    /**
+     *  根据URL，找到相关的权限配置。
+     *  object 是一个URL，被用户请求的url
+     *  缓存脏数据问题-----可以不需要loadResourceDefine方法了，直接在getAttributes方法里面调用dao（这个是加载完，后来才会调用的，所以可以使用dao），
+     *  通过被拦截url获取数据库中的所有权限，封装成Collection<ConfigAttribute>返回就行了
+     */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
-        System.out.println("拦截加载权限分配启动------------获取所有的权限");
+        System.out.println("根据url返回所需的权限");
         FilterInvocation filterInvocation = (FilterInvocation) o;
         if (resourceMap == null) {
             loadResourceDefine();
