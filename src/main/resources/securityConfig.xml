@@ -18,12 +18,13 @@
 
     <!-- 使用自定义类myUserDetailsService从数据库获取用户信息 -->
 <!--    <authentication-manager>
-        <authentication-provider user-service-ref="MyUserDetailService">
+        <authentication-provider user-service-ref="myUserDetailService">
             &lt;!&ndash; 加密 &ndash;&gt;
             <password-encoder hash="md5">
             </password-encoder>
         </authentication-provider>
-    </authentication-manager>-->
+    </authentication-manager>
 
+    <beans:bean id="myUserDetailService" class="com.example.security.MyUserDetailService" />-->
 
 </beans:beans>
