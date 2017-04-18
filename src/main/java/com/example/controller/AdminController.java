@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.Administrator;
 import com.example.service.AdministratorServcice;
+import com.example.service.TreeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,6 +32,8 @@ public class AdminController {
     private AdministratorServcice administratorServcice;
     @Autowired
     private AuthenticationManager myAuthenticationManager;
+    @Autowired
+    private TreeService treeService;
 
     /**
      *  用户登陆验证-----账号密码   TODO:自定义返回类----返回权限信息等
@@ -65,10 +68,16 @@ public class AdminController {
             return "login";
         }
     }
-    @RequestMapping("/getAll")
+    @RequestMapping(value = "/getAll")
     @ResponseBody
     public List<Administrator> getAll(){
         return administratorServcice.getAll();
+    }
+
+    @RequestMapping(value = "/getTree")
+    @ResponseBody
+    public String getTree(){
+        return treeService.getTree();
     }
 
     /**
